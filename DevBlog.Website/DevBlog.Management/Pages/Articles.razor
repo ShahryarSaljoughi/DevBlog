@@ -1,0 +1,32 @@
+﻿@using DevBlog.Core.Model.Entity
+@using DevBlog.Core.Service.Contract
+@using DevBlog.Shared.Utils
+@inject IArticleService ArticleService
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Creation Date</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+      @foreach(var article in ArticleList ?? new List<Article>())
+      {
+        <tr>
+          <th scope="row">1</th>
+          <td>@article.Title</td>
+          <td>@article.CreationDateTime.Prettify()</td>
+          <td></td>
+        </tr>
+      }
+  </tbody>
+</table>
+@code {
+    private List<Article> ArticleList;
+    protected override async Task OnInitializedAsync()
+    {
+        ArticleList = await ArticleService.GetArticlesAsync();
+    }
+}

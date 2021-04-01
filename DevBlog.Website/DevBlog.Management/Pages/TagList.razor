@@ -1,0 +1,20 @@
+﻿@using System.Threading.Tasks;
+@using DevBlog.Core.Service.Contract
+@using DevBlog.Core.Model.Entity
+
+@inject ITagService TagService
+
+<form class="form-inline">
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="inputPassword2" class="sr-only">Tag Title</label>
+    <input @bind="Tag.Title" type="text" class="form-control" id="TagTitle" placeholder="Tag Title ... ">
+  </div>
+  <button type="submit" class="btn btn-primary mb-2" @onclick="async () => await SaveTagAsync()">Create Tag</button>
+</form>
+@code {
+    private Tag Tag = new Tag();
+    private async Task SaveTagAsync()
+    {
+        await TagService.SaveTagAsync(Tag);
+    }
+}

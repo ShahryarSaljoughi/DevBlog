@@ -1,0 +1,86 @@
+﻿@layout EmptyLayout
+@page "/"
+@using DevBlog.Management.Service
+@using DevBlog.Management.Entity
+@using Microsoft.Extensions.Configuration;
+@inject IJSRuntime JSRuntime
+<div class="sidebar">
+    <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+        <ul class="nav flex-column">
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" @onclick="() => GoToPage(Component.NewArticle)">
+                    <span class="oi oi-cloud-upload" aria-hidden="true"></span> New Post
+                </NavLink>
+            </li>
+            <li class="nav-item px-3">
+                <a class="nav-link" @onclick="() => GoToPage(Component.Articles)">
+                    <span class="oi oi-arrow-thick-right" aria-hidden="true"></span> Articles
+                </a>
+            </li>
+            <li class="nav-item px-3">
+                <a class="nav-link" @onclick="() => GoToPage(Component.TagList)">
+                    <span class="oi oi-arrow-thick-right" aria-hidden="true"></span> Tags
+                </a>
+            </li>
+            <li class="nav-item px-3">
+                <a class="nav-link" @onclick="() => GoToPage(Component.Counter)">
+                    <span class="oi oi-arrow-thick-right" aria-hidden="true"></span> Blog
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="main">
+    <div class="top-row px-4">
+        <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+    </div>
+    <div class="content px-4">
+        @switch (AppStateService.CurrentPage)
+        {
+            case Component.NewArticle:
+                <NewPost />
+                break;
+            case Component.Articles:
+                <Articles />
+                break;
+            case Component.TagList:
+                <TagList />
+                break;
+            case Component.Counter:
+                <Counter />
+                break;
+            case Component.Reports:
+                <FetchData />
+                break;
+            case Component.FetchData:
+                <FetchData />
+                break;
+        }
+    </div>
+</div>
+
+
+
+
+<!-- <SurveyPrompt Title="How is Blazor working for you?" /> -->
+@code {
+    private bool collapseNavMenu = true;
+
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    private Component currentPage = AppStateService.CurrentPage;
+    private string BlogAddres => DevBlog.Shared.Utils.ConfigurationManager.ConfigurationAccessor.AppConfig.GetValue<string>("BlogAddress");
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+    private async void GoToPage(Component page)
+    {
+        if (page == AppStateService.CurrentPage)
+            return;
+        await JSRuntime.InvokeAsync<string>("window.QuillFunctions.removeQuillToolbar");
+        AppStateService.CurrentPage = page;
+        this.StateHasChanged();
+    }
+    
+}

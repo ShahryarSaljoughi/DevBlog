@@ -1,0 +1,168 @@
+﻿@page "/new-post"
+@using System.Threading.Tasks
+@using DevBlog.Core.Db
+@using DevBlog.Core.Model.Entity
+@using DevBlog.Core.Service.Contract
+@using System.Linq;
+@using System.Timers
+@using Microsoft.EntityFrameworkCore
+
+@*Inject JSRuntime to allow JavaScript Interop*@
+@inject IJSRuntime JSRuntime
+@inject ITagService TagService
+@inject IArticleService ArticleService
+@if (EditorEnabled)
+{
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Title:</label>
+        <textarea @bind="Article.Title" class="form-control" id="exampleFormControlTextarea1" rows="1">@Title</textarea>
+    </div>
+    <div id="Toolbar"></div>
+    <div id="PostEditor"  @ref="@divEditorElement" />    
+
+    <div class="form-group mt-2">
+        <label for="exampleFormControlTextarea1">Summary Note:</label>
+        <textarea @bind="Description" class="form-control" id="exampleFormControlTextarea1" rows="3">@Description</textarea>
+    </div>
+    <div class="tags" >
+        @foreach(var articletag in Article.ArticleTags)
+        {
+            <span class="badge badge-danger mb-1">@articletag.Tag.Title</span>
+        }
+    </div>    
+    <button class="btn btn-secondary " @onclick="ToggleSearchTagInput">Add Tag</button> 
+    @if(TagSearchInputShown) 
+    {
+        <input @bind="TagSearchTerm" @bind:event="oninput" type="text" placeholder="Search.." id="new-post-tagsearchinput" @onkeyup="RestartTagSearchTimer" @onblur="() => TagSearchTimer.Stop()" @onfocus="() => DropDownShown = true"> <br> 
+        @if(DropDownShown)
+        {
+            <div id="myDropdown" class="new-post-dropdown-content">
+            @foreach(var tag in FetchedTags)
+            {
+                <div @onclick="() => AddTagToArticle(tag)">@tag.Title</div>
+            }
+            </div>
+        }
+        
+    }
+    
+    <button class="btn btn-primary @(TagSearchInputShown? "mt-4": "")" @onclick="async () => SaveArticle()">Save</button>
+    
+
+
+}
+
+@code {
+    private string strSavedContent = "";
+    private ElementReference divEditorElement;
+    private string EditorContent;
+    private string EditorHTMLContent;
+    private string EditorText;
+    private bool EditorEnabled = true;
+    
+    private string Title;
+    private string Description;
+    private Article Article { get; set; } 
+    
+    
+    private List<Tag> FetchedTags { get; set; } = new List<Tag>();
+    private bool TagSearchInputShown = false;
+    private Timer TagSearchTimer = new Timer(1000);
+    private string TagSearchTerm;
+    private bool DropDownShown {get; set;} = false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeAsync<string>(
+                "QuillFunctions.createQuill", divEditorElement);
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        Article = new Article() { ArticleTags = new List<ArticleTag> ()};
+        TagSearchTimer.Elapsed += OnSearchTagTimerElapsed;
+        TagSearchTimer.Stop();
+    }
+
+    async Task<string> GetText()
+    {
+        EditorText = await JSRuntime.InvokeAsync<string>(
+            "QuillFunctions.getQuillText", divEditorElement);
+        return EditorText;
+    }
+    async Task<string> GetHTML()
+    {
+        EditorHTMLContent = await JSRuntime.InvokeAsync<string>(
+            "QuillFunctions.getQuillHTML", divEditorElement);
+        return EditorHTMLContent;
+    }
+    async Task<string> GetEditorContent()
+    {
+        EditorContent = await JSRuntime.InvokeAsync<string>(
+            "QuillFunctions.getQuillContent", divEditorElement);
+        return EditorContent;
+    }
+
+    async Task SaveArticle()
+    {
+        var text = await GetText();
+        var json = await GetEditorContent();
+        var html = await GetHTML();
+
+        Article.ContentHtml = html;
+        Article.ContentJson = json;
+        Article.ContentText = text;
+
+        await using var db = new SmDbContext();
+        var isAlreadyInserted = await db.Set<Article>().AnyAsync(article => article.Id == Article.Id);
+        if (!isAlreadyInserted)
+        {
+            db.Set<Article>().Add(Article);
+        }
+        else
+        {
+            db.Entry(Article).State = EntityState.Modified;
+        }
+
+        foreach(var articleTag in Article.ArticleTags)
+        {
+            db.Entry(articleTag.Tag).State = EntityState.Unchanged;
+        }
+        
+        await db.SaveChangesAsync();
+        await ArticleService.PublishArticleOnTelegramChannel(Article);
+    }
+
+    private void ToggleSearchTagInput()
+    {
+        TagSearchInputShown = !TagSearchInputShown;
+    }
+
+    private void RestartTagSearchTimer()
+    {
+        TagSearchTimer.Stop();
+        TagSearchTimer.Start();
+    }
+
+    private async void OnSearchTagTimerElapsed(object source, ElapsedEventArgs args)
+    {
+        TagSearchTimer.Stop();
+        FetchedTags = await TagService.GetMatchingTags(TagSearchTerm);
+    }
+
+    private void AddTagToArticle(Tag tag)
+    {
+        DropDownShown = false;
+        Article.ArticleTags.Add(new ArticleTag()
+        {
+            ArticleId = Article.Id,
+            Article = Article,
+            TagId = tag.Id,
+            Tag = tag
+        });
+    }
+    
+}

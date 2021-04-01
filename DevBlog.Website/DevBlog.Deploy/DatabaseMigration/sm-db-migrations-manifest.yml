@@ -1,0 +1,9 @@
+kind: InternalService
+name: sm-db-migrations
+spec:
+  image: 'sm-db-migrations:v0.1'
+  image_pull_policy: IfNotPresent
+  port: 80
+  replicas: 1
+  resources:
+    memory: 200Mi

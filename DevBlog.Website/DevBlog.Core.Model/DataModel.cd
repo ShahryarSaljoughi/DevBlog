@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DevBlog.Core.Model.Entity.Article">
+    <Position X="10.25" Y="2" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgQkAAEQEAAAAAAAAAAAAAAAAAQAAABAA=</HashCode>
+      <FileName>Entity\Article.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="ArticleTags" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="DevBlog.Core.Model.Entity.ArticleTag">
+    <Position X="7.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAEAAAAAAAgAAAAAAAAAE=</HashCode>
+      <FileName>Entity\ArticleTag.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DevBlog.Core.Model.Entity.Tag">
+    <Position X="4.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Entity\Tag.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="ArticleTags" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

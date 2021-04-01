@@ -1,0 +1,11 @@
+kind: ExternalService
+name: sm-mgmt
+spec:
+  allow_http: false
+  image: 'sm-mgmt:v0.1'
+  image_pull_policy: IfNotPresent
+  path: /
+  port: 80
+  replicas: 1
+  resources:
+    memory: 200Mi

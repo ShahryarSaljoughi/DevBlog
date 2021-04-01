@@ -1,0 +1,18 @@
+kind: ExternalService
+name: sm-db
+spec:
+  allow_http: true
+  env:
+    - hidden: false
+      name: POSTGRES_PASSWORD
+      value: SomePassword
+  image: 'library/postgres:latest'
+  image_pull_policy: IfNotPresent
+  path: /
+  port: 5432
+  replicas: 1
+  resources:
+    memory: 200Mi
+  volume_mounts:
+    - mount_path: /var/lib/postgresql
+      volume_name: sm-db-vol

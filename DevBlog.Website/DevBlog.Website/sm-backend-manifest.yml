@@ -1,0 +1,11 @@
+kind: ExternalService
+name: sm-backend
+spec:
+  allow_http: false
+  image: 'sm-backend:v0.1'
+  image_pull_policy: IfNotPresent
+  path: /
+  port: 80
+  replicas: 1
+  resources:
+    memory: 600Mi

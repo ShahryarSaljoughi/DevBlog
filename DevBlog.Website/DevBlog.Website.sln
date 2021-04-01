@@ -1,0 +1,94 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29609.76
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevBlog.Website", "DevBlog.Website\DevBlog.Website.csproj", "{D744DE32-A420-4D47-990D-F8863919400B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DevBlog.Core", "DevBlog.Core", "{E1BF9598-4A2D-491A-AFFD-32F989B6A034}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevBlog.Core.Model", "DevBlog.Core.Model\DevBlog.Core.Model.csproj", "{FE722A0A-0815-4BFC-A950-59D7FF8B52ED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevBlog.Core.Db", "DevBlog.Core.Db\DevBlog.Core.Db.csproj", "{E8BA433F-8DAE-4A07-A2E8-52D64AF50364}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DevBlog.Deploy", "DevBlog.Deploy", "{2DAF673A-81F5-4E1B-8EB6-4053507FF593}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{96552574-6B69-4AD0-AA05-84B9FE5D362D}"
+	ProjectSection(SolutionItems) = preProject
+		DevBlog.Deploy\Database\Dockerfile = DevBlog.Deploy\Database\Dockerfile
+		DevBlog.Deploy\Database\sm-db-manifest.yml = DevBlog.Deploy\Database\sm-db-manifest.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PgAdmin", "PgAdmin", "{1839C6A4-8E2F-460C-BEF9-FC2DA9FD37FD}"
+	ProjectSection(SolutionItems) = preProject
+		DevBlog.Deploy\PgAdmin\sm-pgadmin-manifest.yml = DevBlog.Deploy\PgAdmin\sm-pgadmin-manifest.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{15758264-9F6C-4838-94DA-06532C86391F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Devblog.Website.Deploy", "Devblog.Website.Deploy", "{A3222E04-BDC1-47A1-A1D8-731426FD3CD8}"
+	ProjectSection(SolutionItems) = preProject
+		DevBlog.Deploy\DevBlog.Website.Deploy\Dockerfile = DevBlog.Deploy\DevBlog.Website.Deploy\Dockerfile
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevBlog.Core.Service", "DevBlog.Core.Service\DevBlog.Core.Service.csproj", "{79301441-94B7-4669-AB1A-C6D479B41595}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevBlog.Shared.Utils", "DevBlog.Shared.Utils\DevBlog.Shared.Utils.csproj", "{DD81861F-51C4-45B3-BFFB-5E83FA4A8818}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DatabaseMigration", "DatabaseMigration", "{B890EA94-F023-4CE5-9C77-E24C4E3758BE}"
+	ProjectSection(SolutionItems) = preProject
+		DevBlog.Deploy\DatabaseMigration\Dockerfile = DevBlog.Deploy\DatabaseMigration\Dockerfile
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevBlog.Management", "DevBlog.Management\DevBlog.Management.csproj", "{1AC1D606-DBE9-4A60-9DEB-0CBAC31CCD27}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D744DE32-A420-4D47-990D-F8863919400B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D744DE32-A420-4D47-990D-F8863919400B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D744DE32-A420-4D47-990D-F8863919400B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D744DE32-A420-4D47-990D-F8863919400B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE722A0A-0815-4BFC-A950-59D7FF8B52ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE722A0A-0815-4BFC-A950-59D7FF8B52ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE722A0A-0815-4BFC-A950-59D7FF8B52ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE722A0A-0815-4BFC-A950-59D7FF8B52ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8BA433F-8DAE-4A07-A2E8-52D64AF50364}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8BA433F-8DAE-4A07-A2E8-52D64AF50364}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8BA433F-8DAE-4A07-A2E8-52D64AF50364}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8BA433F-8DAE-4A07-A2E8-52D64AF50364}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79301441-94B7-4669-AB1A-C6D479B41595}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79301441-94B7-4669-AB1A-C6D479B41595}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79301441-94B7-4669-AB1A-C6D479B41595}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79301441-94B7-4669-AB1A-C6D479B41595}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD81861F-51C4-45B3-BFFB-5E83FA4A8818}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD81861F-51C4-45B3-BFFB-5E83FA4A8818}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD81861F-51C4-45B3-BFFB-5E83FA4A8818}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD81861F-51C4-45B3-BFFB-5E83FA4A8818}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AC1D606-DBE9-4A60-9DEB-0CBAC31CCD27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AC1D606-DBE9-4A60-9DEB-0CBAC31CCD27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AC1D606-DBE9-4A60-9DEB-0CBAC31CCD27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AC1D606-DBE9-4A60-9DEB-0CBAC31CCD27}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D744DE32-A420-4D47-990D-F8863919400B} = {15758264-9F6C-4838-94DA-06532C86391F}
+		{FE722A0A-0815-4BFC-A950-59D7FF8B52ED} = {E1BF9598-4A2D-491A-AFFD-32F989B6A034}
+		{E8BA433F-8DAE-4A07-A2E8-52D64AF50364} = {E1BF9598-4A2D-491A-AFFD-32F989B6A034}
+		{96552574-6B69-4AD0-AA05-84B9FE5D362D} = {2DAF673A-81F5-4E1B-8EB6-4053507FF593}
+		{1839C6A4-8E2F-460C-BEF9-FC2DA9FD37FD} = {2DAF673A-81F5-4E1B-8EB6-4053507FF593}
+		{A3222E04-BDC1-47A1-A1D8-731426FD3CD8} = {2DAF673A-81F5-4E1B-8EB6-4053507FF593}
+		{79301441-94B7-4669-AB1A-C6D479B41595} = {E1BF9598-4A2D-491A-AFFD-32F989B6A034}
+		{DD81861F-51C4-45B3-BFFB-5E83FA4A8818} = {E1BF9598-4A2D-491A-AFFD-32F989B6A034}
+		{B890EA94-F023-4CE5-9C77-E24C4E3758BE} = {2DAF673A-81F5-4E1B-8EB6-4053507FF593}
+		{1AC1D606-DBE9-4A60-9DEB-0CBAC31CCD27} = {15758264-9F6C-4838-94DA-06532C86391F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D55382BE-FA39-46F7-AB3F-ADFBAC2D751E}
+	EndGlobalSection
+EndGlobal

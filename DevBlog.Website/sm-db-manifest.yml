@@ -1,0 +1,14 @@
+kind: ManagedService
+name: sm-db
+spec:
+  parameters:
+    - name: postgres_password
+      value: SomePassword
+    - name: volume_name
+      value: sm-db-vol
+  replicas: 1
+  resources:
+    memory: 200Mi
+  service_name: postgresql
+  version: '10.4'
+   

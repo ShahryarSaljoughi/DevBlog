@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>1f690c5a-102a-43d0-b677-dbc706a21c85</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.9" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DevBlog.Core.Db\DevBlog.Core.Db.csproj" />
+    <ProjectReference Include="..\DevBlog.Core.Model\DevBlog.Core.Model.csproj" />
+    <ProjectReference Include="..\DevBlog.Core.Service\DevBlog.Core.Service.csproj" />
+    <ProjectReference Include="..\DevBlog.Shared.Utils\DevBlog.Shared.Utils.csproj" />
+  </ItemGroup>
+
+</Project>

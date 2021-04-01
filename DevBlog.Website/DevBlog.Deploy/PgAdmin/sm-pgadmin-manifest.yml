@@ -1,0 +1,18 @@
+kind: ExternalService
+name: sm-pgadmin
+spec:
+  allow_http: true
+  env:
+    - hidden: false
+      name: PGADMIN_DEFAULT_EMAIL
+      value: s.shahryar75@gmail.com
+    - hidden: false
+      name: PGADMIN_DEFAULT_PASSWORD
+      value: amin1672
+  image: 'dpage/pgadmin4:latest'
+  image_pull_policy: Always
+  path: /pgadmin
+  port: 80
+  replicas: 1
+  resources:
+    memory: 200Mi
